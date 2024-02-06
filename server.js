@@ -17,12 +17,12 @@ const app = express();
 // Import the path module
 const path = require("path");
 // Define the path where text file will stored
-const textfiles = `D:/Guvi/GuviTask/nodejs-filesystem/textfiles/${date}-${time}.txt`;
+const textfiles = path.join(__dirname, "textfiles", `${date}-${time}.txt`);
 
 // Extract the directory name from the textfiles path
 let txtFolder = path.dirname(textfiles);
 
-//  Define a route for the root url
+//  Define a route for the root URL
 app.get("/", (request, response) => {
   fs.writeFileSync(
     `${txtFolder}/${date}-${time}.txt`,
