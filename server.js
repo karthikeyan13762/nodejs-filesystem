@@ -54,6 +54,22 @@ app.get("/files", (req, res) => {
   });
 });
 
+// Define a route for reading the content of a specific text file
+app.get("/file/:filename", (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(textfilesDir, filename);
+
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
+      console.log("Error reading file:", err);
+      res.status(404).send("File not found");
+      return;
+    }
+    console.log("File content:", data);
+    res.send(data);
+  });
+});
+
 // Define the port and hostname for the server
 const port = 3001;
 const hostname = "127.0.0.1";
